@@ -67,4 +67,14 @@
         box-shadow: -14px 0 48px 0 #99a7bf;
         flex: 0 0 auto;
     }
+    .menubar::after {
+        position: absolute;
+        top: 0;
+        right: -20px;
+        bottom: 0;
+        display: block;
+        width: 20px;
+        content: '';
+        cursor: col-resize;
+    }
 </style>
