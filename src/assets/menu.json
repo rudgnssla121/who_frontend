@@ -1,0 +1,62 @@
+{
+    "menulist": [
+        {
+                        "id": 1,
+                        "name": "소개",
+                        "children": [
+                {
+                                "id": 2,
+                                "name": "동아리소개",
+                                "url": "/intro"
+                },
+                {
+                                "id": 3,
+                                "name": "사진",
+                                "url": "aaa3"
+                }
+            ]
+        },
+        {
+                        "id": 4,
+                        "name": "해커톤",
+                        "children": [
+                {
+                                "id": 5,
+                                "name": "공지사항",
+                                "url": "/noticepage"
+                },
+                {
+                                "id": 6,
+                                "name": "사진",
+                                "url": "bbb2"
+                },
+                {
+                                "id": 7,
+                                "name": "참가신청",
+                                "url": "bbb3"
+                }
+            ]
+        },
+        {
+                        "id": 8,
+                        "name": "공지 및 신입생신청",
+                        "children": [
+                {
+                                "id": 9,
+                                "name": "공지사항",
+                                "url": "/noticeboard"
+                },
+                {
+                                "id": 10,
+                                "name": "신입생신청",
+                                "url": "ccc2"
+                },
+                {
+                                "id": 11,
+                                "name": "Q&A",
+                                "url": "ccc3"
+                }
+            ]
+        }
+    ]
+}
