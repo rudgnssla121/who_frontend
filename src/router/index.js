@@ -5,19 +5,27 @@ import LoginPage from "@/components/member/LoginPage";
 import SignupPage from "@/components/member/SignupPage";
 import NoticePage from "@/components/noticepage/NoticePage";
 import store from "@/store"
+import notFound from "@/components/404Page"
 
 Vue.use(VueRouter)
 
   const routes = [
     {
-      name: 'main',
       path: '*',
-      component: LoginPage,
+      redirect: '/404',
+    },
+    {
+      path: '/404',
+      component: notFound
     },
     {
       name: 'login',
-      path: '/login',
+      path: '/',
       component: LoginPage,
+    },
+    {
+      path: '/login',
+      redirect: '/'
     },
     {
       name: 'signup',
@@ -50,7 +58,7 @@ router.beforeEach((to, from, next) =>{
     });
 
   // if(auth && !store.getters.authenticated) {
-  if(auth && !store.state.check) {
+  if(auth && !localStorage.getItem('pass')) {
     next({name: 'login', replace: true});
     return;
   }

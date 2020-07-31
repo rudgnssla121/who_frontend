@@ -17,9 +17,8 @@
                             :error-messages="nameErrors"
                             :counter="10"
                             label="Name"
+                            @keyup.enter="signIn"
                             required
-                            @input="$v.name.$touch()"
-                            @blur="$v.name.$touch()"
                     ></v-text-field>
                     <v-text-field
                             v-model="password"
@@ -33,13 +32,12 @@
                             value=""
                             class="input-group--focused"
                             @click:append="show = !show"
-                            @input="$v.password.$touch()"
-                            @blur="$v.password.$touch()"
+                            @keyup.enter="signIn"
                     ></v-text-field>
 
                 </v-col>
-                <v-btn class="mr-4" @click="submit" style="float: left">로그인</v-btn>
-                <v-btn class="mr-4" @click="submitGuest">게스트로그인</v-btn>
+                <v-btn class="mr-4" @click="signIn" style="float: left">로그인</v-btn>
+                <v-btn class="mr-4" @click="signInGuest">게스트로그인</v-btn>
                 <div class="signup-link">
                     who동아리원이 아니신가요? <router-link :to="{name: 'signup'}" tag="a">회원가입</router-link>
                 </div>
@@ -93,11 +91,13 @@
 
         },
         methods: {
-            submit () {
+            signIn () {
                 for(let i = 0; i < this.$store.state.memberlist.length; i++) {
                     if (this.username == this.$store.state.memberlist[i].username && this.password == this.$store.state.memberlist[i].password) {
                         console.log(this.username + "님이 로그인하셨습니다");
+                        this.pass=true
                         this.$store.commit('checkChange');
+                        localStorage.setItem('pass', this.pass);
                         this.$router.push('/main');
                     }
                 }
@@ -105,7 +105,7 @@
                     alert("로그인을 실패하셨습니다");
                 }
             },
-            submitGuest(){
+            signInGuest(){
                 this.$store.commit('checkChange');
                 this.$router.push('/main');
             }

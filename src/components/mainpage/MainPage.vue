@@ -29,7 +29,8 @@
 
 <style>
     .content{
-        width: 350px;
+        position: relative;
+        width: 30px;
         margin-left: auto;
         margin-right: auto;
         margin-top: 350px;

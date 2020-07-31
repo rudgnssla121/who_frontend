@@ -18,8 +18,7 @@
                             :counter="10"
                             label="Name"
                             required
-                            @input="$v.name.$touch()"
-                            @blur="$v.name.$touch()"
+
                     ></v-text-field>
                     <v-text-field
                             v-model="password"
@@ -33,16 +32,14 @@
                             value=""
                             class="input-group--focused"
                             @click:append="show = !show"
-                            @input="$v.password.$touch()"
-                            @blur="$v.password.$touch()"
+
                     ></v-text-field>
                     <v-text-field
                             v-model="email"
                             :error-messages="emailErrors"
                             label="E-mail"
                             required="required"
-                            @input="$v.email.$touch()"
-                            @blur="$v.email.$touch()"></v-text-field>
+                            ></v-text-field>
 
                 </v-col>
                 <v-btn class="mr-4" @click="submit">회원가입</v-btn>

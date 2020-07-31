@@ -6,7 +6,7 @@
 
         <div class="btn">
             <div class="loginbtn">
-                <v-btn class="mr-4" @click="gotoUrl(logout)">로그아웃</v-btn>
+                <v-btn class="white--text" @click="gotoUrl(logout)" color="#5c6bc0">로그아웃</v-btn>
             </div>
             <div class="signupbtn">
 
@@ -16,13 +16,11 @@
 </template>
 
 <script>
-    import MenuBar from "@/components/common/MenuBar.vue"
 
     export default {
         data:function(){
             return{
                 loginUrl: '/login',
-                signupUrl: '/signup',
                 logout: '/login'
             }
         },
@@ -32,29 +30,25 @@
             }
         },
         components: {
-            'menu-bar' : MenuBar
+
         },
 
     }
 </script>
 
-<style>
+<style scoped>
     .who-logo{
         float:left;
         margin: 15px;
     }
-
     .btn{
         position: relative;
         float: right;
         margin-right: 15px;
         margin-top: 15px;
+
     }
-    .loginbtn{
-        float: left;
-        margin-right: 10px;
-    }
-    .signupbtn{
-        float: left;
+    .mr-4 v-btn v-btn--contained theme--light v-size--default{
+        color: white !important;
     }
 </style>
