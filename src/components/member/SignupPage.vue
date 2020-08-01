@@ -42,7 +42,7 @@
                             ></v-text-field>
 
                 </v-col>
-                <v-btn class="mr-4" @click="submit">회원가입</v-btn>
+                <v-btn class="mr-4" @click="signUp">회원가입</v-btn>
             </form>
         </div>
         </div>
@@ -75,7 +75,7 @@
                 min: v => v.length >= 8 || 'Min 8 characters',
                 emailMatch: () => ('The email and password you entered don\'t match'),
             },
-            pass: false,
+            pass: true,
         }),
         computed: {
             nameErrors () {
@@ -110,9 +110,20 @@
             }
         },
         methods: {
-            submit () {
-                this.$store.dispatch('listAdd', this.dataSet);
-                this.$router.push('/login');
+            signUp () {
+                for(let i = 0; i < this.$store.state.memberlist.length; i++) {
+                    if (this.username == this.$store.state.memberlist[i].username) {
+                        this.pass = false;
+                    }
+                }
+                if(this.pass) {
+                    this.$store.dispatch('listAdd', this.dataSet);
+                    this.$router.push('/login');
+                }
+                else {
+                    alert("이미 존재하는 아이디입니다. 다시 작성해주세요");
+                    this.pass = true;
+                }
             },
         },
         created() {

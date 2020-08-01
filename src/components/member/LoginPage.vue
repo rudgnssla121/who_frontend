@@ -107,6 +107,8 @@
             },
             signInGuest(){
                 this.$store.commit('checkChange');
+                localStorage.setItem('pass', this.pass);
+                localStorage.setItem('userID', this.username);
                 this.$router.push('/main');
             }
         },

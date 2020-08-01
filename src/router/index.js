@@ -4,8 +4,12 @@ import MainPage from "@/components/mainpage/MainPage";
 import LoginPage from "@/components/member/LoginPage";
 import SignupPage from "@/components/member/SignupPage";
 import NoticePage from "@/components/noticepage/NoticePage";
-import store from "@/store"
-import notFound from "@/components/404Page"
+import store from "@/store";
+import notFound from "@/components/404Page";
+import NoticewordPage from "@/components/noticepage/NoticewordPage";
+import IntroduceWho from "@/components/introduce/IntroduceWho";
+import NoticeAdd from "@/components/noticepage/NoticeAdd";
+
 
 Vue.use(VueRouter)
 
@@ -39,9 +43,27 @@ Vue.use(VueRouter)
       meta: {auth:true}
     },
     {
+      name: 'introducewho',
+      path: '/introducewho',
+      component: IntroduceWho,
+      meta: {auth:true}
+    },
+    {
       name: 'noticepage',
       path: '/noticepage',
       component: NoticePage,
+      meta: {auth:true}
+    },
+    {
+      name: 'noticewordpage',
+      path: '/noticewordpage/:noticeindex',
+      component: NoticewordPage,
+      meta: {auth:true}
+    },
+    {
+      name: 'noticeadd',
+      path: '/noticeadd',
+      component: NoticeAdd,
       meta: {auth:true}
     },
 ]

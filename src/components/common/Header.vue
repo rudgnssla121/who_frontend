@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="who-logo">
-            <router-link :to="{name:'main'}"><img src='@/assets/who_logo.png'> </router-link>
+            <router-link :to="{name:'mainpage'}"><img src='@/assets/who_logo.png'> </router-link>
         </div>
 
         <div class="btn">
@@ -27,6 +27,7 @@
         methods:{
             gotoUrl(url){
                 this.$router.push(url);
+                localStorage.removeItem("pass");
             }
         },
         components: {
@@ -37,6 +38,12 @@
 </script>
 
 <style scoped>
+    .header{
+        height: 100px;
+        width: 100%;
+        clear: both;
+        border-bottom: 4px solid #5c6bc0;
+    }
     .who-logo{
         float:left;
         margin: 15px;

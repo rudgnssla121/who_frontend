@@ -1,14 +1,16 @@
 <template>
     <div class="nav">
         <v-card
-                max-width="400"
+                max-width="250"
                 class="mx-auto"
+                height="750px"
+                tile
         >
             <v-toolbar
                     color="#5c6bc0"
                     dark
+                    height="50px"
             >
-                <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
                 <v-toolbar-title>WHO</v-toolbar-title>
 
@@ -70,9 +72,8 @@
     .nav {
         position: relative;
         margin: 0;
-        width: 300px;
-        clear: both;
-        height: 700px;
+        width: 250px;
+        height: fit-content;
         float: left;
 
     }
