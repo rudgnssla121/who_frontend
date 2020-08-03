@@ -38,6 +38,7 @@
                 </v-col>
                 <v-btn class="mr-4" @click="signIn" style="float: left">로그인</v-btn>
                 <v-btn class="mr-4" @click="signInGuest">게스트로그인</v-btn>
+                <br><br>
                 <div class="signup-link">
                     who동아리원이 아니신가요? <router-link :to="{name: 'signup'}" tag="a">회원가입</router-link>
                 </div>
@@ -51,6 +52,7 @@
 <script>
     import { validationMixin } from 'vuelidate'
     import { required, maxLength} from 'vuelidate/lib/validators'
+    import memberAPI from '@/api/member'
 
     export default {
         mixins: [validationMixin],
@@ -92,18 +94,36 @@
         },
         methods: {
             signIn () {
-                for(let i = 0; i < this.$store.state.memberlist.length; i++) {
-                    if (this.username == this.$store.state.memberlist[i].username && this.password == this.$store.state.memberlist[i].password) {
-                        console.log(this.username + "님이 로그인하셨습니다");
-                        this.pass=true
-                        this.$store.commit('checkChange');
-                        localStorage.setItem('pass', this.pass);
-                        this.$router.push('/main');
-                    }
+                var temp={
+                    'username':this.username,
+                    'password':this.password
                 }
-                if(!this.pass) {
-                    alert("로그인을 실패하셨습니다");
-                }
+                this.$http.post("/api/member/login", temp)
+                    .then(result => {
+                        console.log("http");
+                        if(result.data.pass==true){
+                            localStorage.setItem('pass',result.data.pass);
+                            localStorage.setItem('userID', result.data.username);
+                            console.log(result.data.username);
+                            this.$router.replace({name: 'mainpage'})
+                        }
+                        else {
+                            alert("로그인에 실패했습니다")
+                        }
+                    })
+                console.log("http밖");
+                // for(let i = 0; i < this.$store.state.memberlist.length; i++) {
+                //     if (this.username == this.$store.state.memberlist[i].username && this.password == this.$store.state.memberlist[i].password) {
+                //         console.log(this.username + "님이 로그인하셨습니다");
+                //         this.pass=true
+                //         this.$store.commit('checkChange');
+                //         localStorage.setItem('pass', this.pass);
+                //         this.$router.push('/main');
+                //     }
+                // }
+                // if(!this.pass) {
+                //     alert("로그인을 실패하셨습니다");
+                // }
             },
             signInGuest(){
                 this.$store.commit('checkChange');
