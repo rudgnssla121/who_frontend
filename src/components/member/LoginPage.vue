@@ -8,7 +8,7 @@
             <h1 class="tit-h1">Sign In</h1>
         </div>
         <div class="loginform">
-            <form>
+            <v-form v-model="isValid">
                 <v-col
                         cols="12"
                 >
@@ -16,6 +16,7 @@
                             v-model="username"
                             :error-messages="nameErrors"
                             :counter="10"
+                            :rules="[rules.required]"
                             label="Name"
                             @keyup.enter="signIn"
                             required
@@ -36,13 +37,13 @@
                     ></v-text-field>
 
                 </v-col>
-                <v-btn class="mr-4" @click="signIn" style="float: left">로그인</v-btn>
+                <v-btn class="mr-4" @click="signIn" style="float: left" :disabled="!isValid">로그인</v-btn>
                 <v-btn class="mr-4" @click="signInGuest">게스트로그인</v-btn>
                 <br><br>
                 <div class="signup-link">
                     who동아리원이 아니신가요? <router-link :to="{name: 'signup'}" tag="a">회원가입</router-link>
                 </div>
-            </form>
+            </v-form>
         </div>
         </div>
     </div>
@@ -67,7 +68,8 @@
             email: '',
             show: false,
             password: 'Password',
-            rules: {
+            isValid: true,
+          rules: {
                 required: value => !!value || 'Required.',
                 min: v => v.length >= 8 || 'Min 8 characters',
                 emailMatch: () => ('The email and password you entered don\'t match'),
@@ -88,30 +90,32 @@
                 if (!this.$v.password.$dirty) return errors
                 !this.$v.password.maxLength && errors.push('password must be at most 10 characters long')
                 !this.$v.password.required && errors.push('password is required.')
+              console.log(errors);
                 return errors
             },
 
         },
         methods: {
             signIn () {
-                var temp={
-                    'username':this.username,
-                    'password':this.password
-                }
-                this.$http.post("/api/member/login", temp)
-                    .then(result => {
-                        console.log("http");
-                        if(result.data.pass==true){
-                            localStorage.setItem('pass',result.data.pass);
-                            localStorage.setItem('userID', result.data.username);
-                            console.log(result.data.username);
-                            this.$router.replace({name: 'mainpage'})
-                        }
-                        else {
-                            alert("로그인에 실패했습니다")
-                        }
-                    })
-                console.log("http밖");
+
+                 var temp = {
+                   'username': this.username,
+                   'password': this.password
+                 }
+                 memberAPI.login(temp)
+                     .then(result => {
+                       if (result.data.pass) {
+                         localStorage.setItem('pass', result.data.pass);
+                         localStorage.setItem('userID', result.data.username);
+                         //console.log(result.data.username);
+                         this.$router.replace({name: 'mainpage'})
+                       }
+                       else if(!result.data.pass){
+                         alert("로그인에 실패했습니다")
+                       }
+                     })
+
+                //console.log("http밖");
                 // for(let i = 0; i < this.$store.state.memberlist.length; i++) {
                 //     if (this.username == this.$store.state.memberlist[i].username && this.password == this.$store.state.memberlist[i].password) {
                 //         console.log(this.username + "님이 로그인하셨습니다");

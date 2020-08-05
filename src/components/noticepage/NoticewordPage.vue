@@ -10,16 +10,16 @@
             <div class = "contentname">
                 <h1>  공지사항  </h1>
                 <div class = "contenttime">
-                    <p>시간 : {{noticedata[index].time}}</p>
+                    <p>시간 : {{noticecontent.time}}</p>
                 </div>
                 <hr>
                 <div class = "name">
-                    <h2>제목 : {{noticedata[index].name}}</h2>
+                    <h2>제목 : {{noticecontent.name}}</h2>
                 </div>
             </div>
             <br>
             <div class = "contenttitle">
-                <p>{{noticedata[index].content}}</p>
+                <p>{{noticecontent.content}}</p>
             </div>
             <div class="backbtn">
                 <v-btn class="white--text" @click="gotoUrl()" color="#5c6bc0">목록으로</v-btn>
@@ -36,18 +36,23 @@
     import AppHeader from "@/components/common/Header"
     import AppFooter from "@/components/common/Footer"
     import SideBar from "@/components/common/MenuBar"
-    import noticedata from "@/assets/noticedata.json"
+    import noticeAPI from "@/api/notice"
+
 
     export default {
         created() {
             this.index = this.$route.params.noticeindex;
+            noticeAPI.listFind(this.index)
+              .then(result => {
+                  this.noticecontent = result.data;
+                  console.log(this.index);
+              })
         },
 
         data:()=>({
-            index:0,
-            noticedata,
-            listback:'/noticepage'
-
+            noticecontent : {},
+            listback:'/noticepage',
+            index:0
         }),
         components: {
             'side-bar' : SideBar,

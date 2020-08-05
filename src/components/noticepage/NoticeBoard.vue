@@ -39,10 +39,19 @@
 </template>
 
 <script>
-    import noticedata from "@/assets/noticedata.json"
+
+    import noticeAPI from "@/api/notice"
+
     export default {
-        data: () => ({
-            noticedata,
+      created() {
+        noticeAPI.listView()
+            .then(result => {
+              this.noticedata = result.data;
+            })
+
+      },
+      data: () => ({
+            noticedata : [],
             dataPerPage: 10,
             PageNum: 1,
             noticeadd: 'noticeadd',
@@ -52,7 +61,6 @@
                 this.$router.push(url);
             },
             clickNotice(index){
-                console.log(this.realpage+index);
                 this.$router.push({ name: 'noticewordpage', params: {noticeindex: this.realpage+index}})
             }
         },

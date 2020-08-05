@@ -8,7 +8,7 @@
                 <h1 class="tit-h1">Sign Up</h1>
             </div>
         <div class="signupform">
-            <form>
+            <v-form v-model="isValid">
                 <v-col
                         cols="12"
                 >
@@ -16,9 +16,9 @@
                             v-model="username"
                             :error-messages="nameErrors"
                             :counter="10"
+                            :rules="[rules.required]"
                             label="Name"
                             required
-
                     ></v-text-field>
                     <v-text-field
                             v-model="password"
@@ -39,11 +39,12 @@
                             :error-messages="emailErrors"
                             label="E-mail"
                             required="required"
+                            :rules="emailRules"
                             ></v-text-field>
 
                 </v-col>
-                <v-btn class="mr-4" @click="signUp">회원가입</v-btn>
-            </form>
+                <v-btn class="mr-4" @click="signUp" :disabled="!isValid">회원가입</v-btn>
+            </v-form>
         </div>
         </div>
     </div>
@@ -73,9 +74,13 @@
             rules: {
                 required: value => !!value || 'Required.',
                 min: v => v.length >= 8 || 'Min 8 characters',
-                emailMatch: () => ('The email and password you entered don\'t match'),
             },
+            emailRules: [
+              v => !!v || 'Email is required',
+              v => /.+@.+/.test(v) || 'E-mail must be valid'
+            ],
             pass: true,
+            isValid: true
         }),
         computed: {
             nameErrors () {
@@ -96,7 +101,6 @@
                 const errors = []
                 if (!this.$v.email.$dirty)
                     return errors
-
                 !this.$v.email.email && errors.push('Must be valid e-mail')
                 !this.$v.email.required && errors.push('E-mail is required')
                 return errors
