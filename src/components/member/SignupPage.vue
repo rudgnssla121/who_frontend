@@ -53,6 +53,7 @@
 <script>
     import { validationMixin } from 'vuelidate'
     import { required, maxLength, email} from 'vuelidate/lib/validators'
+    import memberAPI from "@/api/member"
 
     export default {
         mixins: [validationMixin],
@@ -77,7 +78,7 @@
             },
             emailRules: [
               v => !!v || 'Email is required',
-              v => /.+@.+/.test(v) || 'E-mail must be valid'
+              v => /.+@.+/. test(v) || 'E-mail must be valid'
             ],
             pass: true,
             isValid: true
@@ -115,24 +116,38 @@
         },
         methods: {
             signUp () {
-                for(let i = 0; i < this.$store.state.memberlist.length; i++) {
-                    if (this.username == this.$store.state.memberlist[i].username) {
-                        this.pass = false;
+                var temp = {
+                  'username': this.username,
+                  'password': this.password,
+                  'email': this.email
+                }
+                memberAPI.signup(temp)
+                  .then(result => {
+                    if(result.data.pass){
+                      this.$router.push('/login');
                     }
-                }
-                if(this.pass) {
-                    this.$store.dispatch('listAdd', this.dataSet);
-                    this.$router.push('/login');
-                }
-                else {
-                    alert("이미 존재하는 아이디입니다. 다시 작성해주세요");
-                    this.pass = true;
-                }
+                    else if(result.data.success == "error"){
+                      alert("중복된 아이디입니다. 다시 입력해주세요");
+                    }
+
+                  })
+
+                // for(let i = 0; i < this.$store.state.memberlist.length; i++) {
+                //     if (this.username == this.$store.state.memberlist[i].username) {
+                //         this.pass = false;
+                //     }
+                // }
+                // if(this.pass) {
+                //     this.$store.dispatch('listAdd', this.dataSet);
+                //     this.$router.push('/login');
+                // }
+                // else {
+                //     alert("이미 존재하는 아이디입니다. 다시 작성해주세요");
+                //     this.pass = true;
+                // }
             },
         },
-        created() {
-            this.$store.dispatch('listInit');
-        }
+
     }
 </script>
 

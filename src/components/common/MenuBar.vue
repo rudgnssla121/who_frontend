@@ -71,11 +71,16 @@
 
 <style>
     .nav {
-        position: relative;
+        position: absolute;
+        clear: both;
+        top:15%;
         margin: 0;
-        width: 250px;
-        height: fit-content;
+
+
         float: left;
+        z-index: 1;
+
+        flex: 0 0 auto;
 
     }
     .v-sheet.v-card:not(.v-sheet--outlined) {

@@ -41,7 +41,9 @@
                 <v-btn class="mr-4" @click="signInGuest">게스트로그인</v-btn>
                 <br><br>
                 <div class="signup-link">
-                    who동아리원이 아니신가요? <router-link :to="{name: 'signup'}" tag="a">회원가입</router-link>
+                    who동아리원이 아니신가요? <router-link :to="{name: 'signup'}" tag="a">회원가입</router-link><br>
+                  <router-link :to="{name: 'findid'}" tag="a">id찾기</router-link> <span>   </span>
+                  <router-link :to="{name: 'signup'}" tag="a">password찾기</router-link>
                 </div>
             </v-form>
         </div>
@@ -69,15 +71,14 @@
             show: false,
             password: 'Password',
             isValid: true,
-          rules: {
-                required: value => !!value || 'Required.',
-                min: v => v.length >= 8 || 'Min 8 characters',
-                emailMatch: () => ('The email and password you entered don\'t match'),
-            },
-            pass: false,
+            checkword : '',
+            rules: {
+                  required: value => !!value || 'Required.',
+                  min: v => v.length >= 8 || 'Min 8 characters',
+              },
+              pass: false,
         }),
         computed: {
-
             nameErrors () {
                 const errors = []
                 if (!this.$v.username.$dirty) return errors
@@ -104,14 +105,19 @@
                  }
                  memberAPI.login(temp)
                      .then(result => {
-                       if (result.data.pass) {
+                       if (result.data.success == "login sucessfull") {
                          localStorage.setItem('pass', result.data.pass);
                          localStorage.setItem('userID', result.data.username);
+                         this.checkword = result.data.success;
                          //console.log(result.data.username);
                          this.$router.replace({name: 'mainpage'})
+
                        }
-                       else if(!result.data.pass){
-                         alert("로그인에 실패했습니다")
+                       else if(result.data.success == "ID and password does not match"){
+                         alert("아이디와 패스워드가 일치하지 않습니다");
+                       }
+                       else{
+                          alert("아이디가 존재하지 않습니다");
                        }
                      })
 
@@ -130,15 +136,12 @@
                 // }
             },
             signInGuest(){
+                localStorage.setItem('pass', true);
                 this.$store.commit('checkChange');
-                localStorage.setItem('pass', this.pass);
-                localStorage.setItem('userID', this.username);
                 this.$router.push('/main');
             }
         },
-        created() {
-            this.$store.dispatch('listInit');
-        }
+
 
     }
 </script>

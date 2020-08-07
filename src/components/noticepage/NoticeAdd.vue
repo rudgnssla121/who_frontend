@@ -3,9 +3,6 @@
         <div class="app-header">
             <app-header></app-header>
         </div>
-        <div class="sidebar" >
-            <side-bar></side-bar>
-        </div>
         <div class ="noticeaddform">
             <v-form>
                 <v-container>
@@ -55,7 +52,6 @@
 <script>
     import AppHeader from "@/components/common/Header"
     import AppFooter from "@/components/common/Footer"
-    import SideBar from "@/components/common/MenuBar"
 
     export default {
         data:()=>({
@@ -63,7 +59,6 @@
             context: '',
         }),
         components: {
-            'side-bar' : SideBar,
             'app-footer' : AppFooter,
             'app-header':AppHeader,
         },

@@ -9,6 +9,7 @@ import notFound from "@/components/404Page";
 import NoticewordPage from "@/components/noticepage/NoticewordPage";
 import IntroduceWho from "@/components/introduce/IntroduceWho";
 import NoticeAdd from "@/components/noticepage/NoticeAdd";
+import FindId from "@/components/member/FindId";
 
 
 Vue.use(VueRouter)
@@ -16,10 +17,6 @@ Vue.use(VueRouter)
   const routes = [
     {
       path: '*',
-      redirect: '/404',
-    },
-    {
-      path: '/404',
       component: notFound
     },
     {
@@ -35,6 +32,11 @@ Vue.use(VueRouter)
       name: 'signup',
       path: '/signup',
       component: SignupPage,
+    },
+    {
+      name: 'findid',
+      path: '/findid',
+      component: FindId,
     },
     {
       name: 'mainpage',

@@ -3,9 +3,6 @@
         <div class="app-header">
             <app-header></app-header>
         </div>
-        <div class="sidebar" >
-            <side-bar></side-bar>
-        </div>
         <div class = "contentform">
             <div class = "contentname">
                 <h1>  공지사항  </h1>
@@ -35,7 +32,6 @@
 
     import AppHeader from "@/components/common/Header"
     import AppFooter from "@/components/common/Footer"
-    import SideBar from "@/components/common/MenuBar"
     import noticeAPI from "@/api/notice"
 
 
@@ -45,7 +41,6 @@
             noticeAPI.listFind(this.index)
               .then(result => {
                   this.noticecontent = result.data;
-                  console.log(this.index);
               })
         },
 
@@ -55,7 +50,6 @@
             index:0
         }),
         components: {
-            'side-bar' : SideBar,
             'app-footer' : AppFooter,
             'app-header':AppHeader,
         },
