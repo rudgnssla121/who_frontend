@@ -4,7 +4,7 @@
             <template v-slot:default>
                 <thead>
                 <tr>
-                    <th class="text-left" width="250px">작성자</th>
+                    <th class="text-left" width="200px">작성자</th>
                     <th class="text-left" width="700px">제목</th>
                     <th class="text-left" width="200px">시간</th>
                 </tr>
@@ -13,7 +13,7 @@
                 <tr style="cursor:pointer;" @click="clickNotice(index)" v-for="(item,index) in calData" :key="index">
                         <td>{{ item.username }}</td>
                         <td>{{ item.name }}</td>
-                        <td>{{ item.time }}</td>
+                        <td>{{ item.date }}</td>
                 </tr>
                 </tbody>
             </template>
@@ -89,9 +89,7 @@
 
     .noticeboard{
         overflow-x: auto;
-        height: calc(100vh - 60px);
-        -webkit-box-flex: 1;
-        -ms-flex: 1;
+        height: calc(100vh - 75px);
         flex: 1;
     }
     .v-application a{

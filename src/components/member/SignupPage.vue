@@ -40,7 +40,8 @@
                             label="E-mail"
                             required="required"
                             :rules="emailRules"
-                            ></v-text-field>
+                            v-on:keyup.enter="signUp"
+                    ></v-text-field>
 
                 </v-col>
                 <v-btn class="mr-4" @click="signUp" :disabled="!isValid">회원가입</v-btn>

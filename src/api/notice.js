@@ -7,6 +7,9 @@ const member = {
     listFind(index) {
         return axios.get(`/api/notice/listfind/${index}`);
     },
+    listAdd(noticedata){
+        return axios.post('/api/notice/listadd', noticedata);
+    }
 }
 
 export default member

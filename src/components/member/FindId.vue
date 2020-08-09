@@ -18,7 +18,7 @@
                 label="E-mail"
                 required="required"
                 :rules="emailRules"
-                @keyup.enter="findID"
+                v-on:keyup.enter="findID"
             ></v-text-field>
 
           </v-col>
@@ -86,7 +86,6 @@ export default {
       memberAPI.findid(temp)
           .then(result => {
             this.username = result.data;
-            console.log(this.username);
           })
       this.visible = !this.visible
     },

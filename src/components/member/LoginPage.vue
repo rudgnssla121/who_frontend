@@ -17,7 +17,7 @@
                             :error-messages="nameErrors"
                             :counter="10"
                             :rules="[rules.required]"
-                            label="Name"
+                            label="ID"
                             @keyup.enter="signIn"
                             required
                     ></v-text-field>
@@ -42,8 +42,7 @@
                 <br><br>
                 <div class="signup-link">
                     who동아리원이 아니신가요? <router-link :to="{name: 'signup'}" tag="a">회원가입</router-link><br>
-                  <router-link :to="{name: 'findid'}" tag="a">id찾기</router-link> <span>   </span>
-                  <router-link :to="{name: 'signup'}" tag="a">password찾기</router-link>
+                  <router-link :to="{name: 'findid'}" tag="a">ID찾기</router-link>
                 </div>
             </v-form>
         </div>

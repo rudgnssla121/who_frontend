@@ -56,7 +56,7 @@
 
 <style>
     .footer{
-        position: absolute;
+        position: relative;
         width: 100%;
         bottom:0;
         float: left;

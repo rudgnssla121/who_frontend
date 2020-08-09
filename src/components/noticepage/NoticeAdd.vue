@@ -1,8 +1,5 @@
 <template>
     <div class="noticeadd">
-        <div class="app-header">
-            <app-header></app-header>
-        </div>
         <div class ="noticeaddform">
             <v-form>
                 <v-container>
@@ -24,10 +21,11 @@
                     <v-row>
                         <v-textarea
                                 filled="filled"
-                                name="context"
+                                name="content"
                                 hint="내용을 입력해주세요."
-                                v-model="context"
+                                v-model="content"
                                 :counter="1000"
+                                height="450px"
                                 maxlength="1000"></v-textarea>
                     </v-row>
                     <v-row>
@@ -40,31 +38,34 @@
                 </v-container>
             </v-form>
         </div>
-        <div class="footer">
-            <app-footer></app-footer>
-        </div>
+
     </div>
 </template>
 
 
 
-
 <script>
-    import AppHeader from "@/components/common/Header"
-    import AppFooter from "@/components/common/Footer"
+import noticeAPI from "@/api/notice"
 
     export default {
         data:()=>({
             title: '',
-            context: '',
+            content: '',
         }),
         components: {
-            'app-footer' : AppFooter,
-            'app-header':AppHeader,
         },
         methods:{
             addClick(){
-                this.$router.push('/noticepage');
+              var temp = {
+                username : localStorage.getItem('userID'),
+                name : this.title,
+                content : this.content
+              }
+              noticeAPI.listAdd(temp)
+                .then(
+                  this.$router.push('/noticepage')
+                )
+
             }
         }
     }
@@ -78,7 +79,7 @@
 
     .noticeaddform{
         overflow-x: auto;
-        height: calc(100vh - 60px);
+        height: calc(100vh - 75px);
         -webkit-box-flex: 1;
         -ms-flex: 1;
         flex: 1;

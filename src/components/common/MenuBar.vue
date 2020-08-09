@@ -3,7 +3,7 @@
         <v-card
                 max-width="250"
                 class="mx-auto"
-                height="750px"
+                height="720px"
                 tile
         >
             <v-toolbar
@@ -71,16 +71,13 @@
 
 <style>
     .nav {
-        position: absolute;
-        clear: both;
-        top:15%;
-        margin: 0;
-
-
-        float: left;
-        z-index: 1;
-
-        flex: 0 0 auto;
+      position: relative;
+      margin: 0;
+      float: left;
+      z-index: 1;
+      flex: 0 0 auto;
+      left: 0;
+      width: 250px;
 
     }
     .v-sheet.v-card:not(.v-sheet--outlined) {

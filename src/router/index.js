@@ -4,12 +4,13 @@ import MainPage from "@/components/mainpage/MainPage";
 import LoginPage from "@/components/member/LoginPage";
 import SignupPage from "@/components/member/SignupPage";
 import NoticePage from "@/components/noticepage/NoticePage";
-import store from "@/store";
 import notFound from "@/components/404Page";
 import NoticewordPage from "@/components/noticepage/NoticewordPage";
 import IntroduceWho from "@/components/introduce/IntroduceWho";
 import NoticeAdd from "@/components/noticepage/NoticeAdd";
 import FindId from "@/components/member/FindId";
+import NoticeModify from "@/components/noticepage/NoticeModify";
+
 
 
 Vue.use(VueRouter)
@@ -68,6 +69,14 @@ Vue.use(VueRouter)
       component: NoticeAdd,
       meta: {auth:true}
     },
+    {
+      name: 'noticemodify',
+      path: '/noticemodify',
+      component: NoticeModify,
+      meta: {auth:true},
+      props: { boardContent: false }
+    }
+
 ]
 
 const router = new VueRouter({

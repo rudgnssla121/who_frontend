@@ -12,13 +12,13 @@
 
           <div class="modal-body">
             <slot name="body">
-              {{ title }}<span>입니다</span>
+              {{ findId }}
             </slot>
           </div>
 
           <div class="modal-footer">
             <slot name="footer">
-              <button class="modal-default-button" @click="$emit('update:visible', !visible)" style="b">
+              <button class="modal-default-button" @click="$emit('update:visible', !visible)">
                 확인
               </button>
             </slot>
@@ -41,8 +41,22 @@
         type: String,
         require: false,
       },
+    },
+    computed:{
+      findId(){
+        let name = '';
+        console.log(this.title);
+        if(this.title == ''){
+          name = "없습니다";
+        }
+        else {
+          name = `${this.title} 입니다`;
+        }
+        return name;
+      }
     }
   }
+
 </script>
 
 <style scoped>
