@@ -52,11 +52,14 @@
         margin-top: 15px;
         height: 80%;
     }
+
     .introducewho{
         overflow-x: auto;
         height: calc(100vh - 60px);
-        -webkit-box-flex: 1;
-        -ms-flex: 1;
         flex: 1;
+    }
+
+    .introword{
+      margin-right: 15px;
     }
 </style>

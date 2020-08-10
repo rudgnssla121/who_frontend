@@ -13,7 +13,7 @@
                 <tr style="cursor:pointer;" @click="clickNotice(index)" v-for="(item,index) in calData" :key="index">
                         <td>{{ item.username }}</td>
                         <td>{{ item.name }}</td>
-                        <td>{{ item.date }}</td>
+                        <td>{{ item.date + ' ' + item.time }}</td>
                 </tr>
                 </tbody>
             </template>

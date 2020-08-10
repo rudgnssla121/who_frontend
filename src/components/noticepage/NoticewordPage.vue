@@ -17,8 +17,8 @@
                 <p>{{boardContent.noticecontent.content}}</p>
             </div>
             <div class="backbtn">
-                <v-btn class="white--text" @click="gotoBackUrl()" color="#5c6bc0">목록으로</v-btn><span>' '</span>
-                <v-btn class="white--text" @click="gotoUrl(modifyurl)" color="#5c6bc0">수정하기</v-btn>
+                <v-btn class="white--text" @click="gotoBackUrl()" color="#5c6bc0" style="margin-right:15px">목록으로</v-btn>
+                <v-btn v-if="userID == boardContent.noticecontent.username" class="white--text" @click="gotoUrl(modifyurl)" color="#5c6bc0">수정하기</v-btn>
             </div>
         </div>
 
@@ -31,8 +31,9 @@
 
     export default {
         created() {
+            this.userID = localStorage.getItem('userID');
             this.boardContent.index = this.$route.params.noticeindex;
-            noticeAPI.listFind(this.index)
+            noticeAPI.listFind(this.boardContent.index)
               .then(result => {
                   this.boardContent.noticecontent = result.data;
               })
@@ -42,8 +43,10 @@
             boardContent : {
               noticecontent : {},
               index:0,
+
             },
-            modifyurl:'/noticemodify'
+            modifyurl:'/noticemodify',
+            userID: ''
         }),
         components: {
         },
