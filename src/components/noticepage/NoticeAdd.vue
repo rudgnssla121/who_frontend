@@ -1,7 +1,7 @@
 <template>
     <div class="noticeadd">
         <div class ="noticeaddform">
-            <v-form>
+            <v-form v-model="isValid">
                 <v-container>
                     <v-row>
                         제목
@@ -11,6 +11,7 @@
                                 :counter="50"
                                 label="제목을 입력해주세요."
                                 name="title"
+                                :rules="[rules.required]"
                                 required="required"
                                 v-model="title"
                                 maxlength="50"></v-text-field>
@@ -23,6 +24,7 @@
                                 filled="filled"
                                 name="content"
                                 hint="내용을 입력해주세요."
+                                :rules="[rules.required]"
                                 v-model="content"
                                 :counter="1000"
                                 height="450px"
@@ -30,8 +32,11 @@
                     </v-row>
                     <v-row>
                         <div class="btn">
-                            <v-btn block="block" outlined="outlined" color="blue" @click="addClick">
+                            <v-btn  outlined="outlined" color="blue" @click="addClick" :disabled="!isValid" style="float: left; margin-right: 10px">
                                 등록
+                            </v-btn>
+                            <v-btn outlined="outlined" color="blue" @click="gotoBack" >
+                              목록으로
                             </v-btn>
                         </div>
                     </v-row>
@@ -51,6 +56,10 @@ import noticeAPI from "@/api/notice"
         data:()=>({
             title: '',
             content: '',
+          isValid: true,
+          rules: {
+            required: value => !!value || 'Required.'
+          },
         }),
         components: {
         },
@@ -65,8 +74,10 @@ import noticeAPI from "@/api/notice"
                 .then(
                   this.$router.push('/noticepage')
                 )
-
-            }
+            },
+          gotoBack(){
+              this.$router.go(-1);
+          }
         }
     }
 </script>

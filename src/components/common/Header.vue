@@ -26,8 +26,8 @@
         },
         methods:{
             gotoUrl(url){
+                localStorage.clear();
                 this.$router.push(url);
-                localStorage.removeItem("pass");
             }
         },
         components: {

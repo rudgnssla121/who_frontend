@@ -4,6 +4,7 @@
             <template v-slot:default>
                 <thead>
                 <tr>
+                    <th class="text-left" width="100px">순서</th>
                     <th class="text-left" width="200px">작성자</th>
                     <th class="text-left" width="700px">제목</th>
                     <th class="text-left" width="200px">시간</th>
@@ -11,16 +12,17 @@
                 </thead>
                 <tbody>
                 <tr style="cursor:pointer;" @click="clickNotice(index)" v-for="(item,index) in calData" :key="index">
-                        <td>{{ item.username }}</td>
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.date + ' ' + item.time }}</td>
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.username }}</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.date + ' ' + item.time }}</td>
                 </tr>
                 </tbody>
             </template>
 
         </v-simple-table>
         <div class="addbtn" style="float: right; margin-right: 15px">
-            <v-btn class="white--text" @click="gotoUrl(noticeadd)" color="#5c6bc0">글쓰기</v-btn>
+            <v-btn v-if="userID != 'Guest'" class="white--text" @click="gotoUrl(noticeadd)" color="#5c6bc0">글쓰기</v-btn>
         </div>
         <div class="paging">
             <div class="text-center">
@@ -44,6 +46,7 @@
 
     export default {
       created() {
+        this.userID = localStorage.getItem('userID');
         noticeAPI.listView()
             .then(result => {
               this.noticedata = result.data;
@@ -51,6 +54,7 @@
 
       },
       data: () => ({
+            userID : '',
             noticedata : [],
             dataPerPage: 10,
             PageNum: 1,

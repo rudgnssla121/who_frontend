@@ -9,10 +9,9 @@
         <v-row>
           <v-text-field
               :counter="50"
-              label="제목을 입력해주세요."
               name="title"
               required="required"
-              v-model="title"
+              v-model="noticecontent.name"
               maxlength="50"></v-text-field>
         </v-row>
         <v-row>
@@ -22,8 +21,7 @@
           <v-textarea
               filled="filled"
               name="content"
-              hint="내용을 입력해주세요."
-              v-model="content"
+              v-model="noticecontent.content"
               :counter="1000"
               height="450px"
               maxlength="1000"></v-textarea>
@@ -47,21 +45,39 @@ import noticeAPI from "@/api/notice"
 
 export default {
   created() {
-    this.boardContent = this.$route.params.boardContent;
-    noticeAPI.listFind(this.index)
+    this.noticecontent.index = this.$route.params.noticelistindex;
+    noticeAPI.listFind(this.noticecontent.index)
         .then(result => {
-          this.noticecontent = result.data;
+          this.noticecontent.username = result.data.username;
+          this.noticecontent.name = result.data.name;
+          this.noticecontent.content = result.data.content;
+          this.noticecontent.time = result.data.time;
+          this.noticecontent.date = result.data.date;
+
         })
   },
 
   data:()=>({
-    boardContent : {},
+    noticecontent:{
+      username:'',
+      name:'',
+      content:'',
+      time:'',
+      date:'',
+      index : 0,
+    }
   }),
   components: {
+
   },
   methods:{
-    gotoUrl(){
-      this.$router.go(-1);
+    modifyClick(){
+      var temp = {
+        noticecontent : this.noticecontent
+      }
+      noticeAPI.listModify(temp)
+          .then();
+      this.$router.push({name:'noticepage'});
     }
   }
 }
@@ -77,13 +93,5 @@ export default {
   margin-right: auto;
   margin-top: 20px;
 }
-.backbtn{
-  position: relative;
-  margin-top: 20px;
-}
-.contenttitle{
-  width: 100%;
-  height: 400px;
-  border: 1px solid black;
-}
+
 </style>

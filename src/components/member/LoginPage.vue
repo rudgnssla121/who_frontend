@@ -136,6 +136,7 @@
             },
             signInGuest(){
                 localStorage.setItem('pass', true);
+                localStorage.setItem('userID', 'Guest');
                 this.$store.commit('checkChange');
                 this.$router.push('/main');
             }

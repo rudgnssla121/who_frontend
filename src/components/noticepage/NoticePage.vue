@@ -1,7 +1,6 @@
 <template>
     <div class="noticepage">
             <notice-board></notice-board>
-
     </div>
 </template>
 

@@ -12,8 +12,8 @@ import FindId from "@/components/member/FindId";
 import NoticeModify from "@/components/noticepage/NoticeModify";
 
 
-
 Vue.use(VueRouter)
+
 
   const routes = [
     {
@@ -71,13 +71,13 @@ Vue.use(VueRouter)
     },
     {
       name: 'noticemodify',
-      path: '/noticemodify',
+      path: '/noticemodify/:noticelistindex',
       component: NoticeModify,
-      meta: {auth:true},
-      props: { boardContent: false }
+      meta: {auth:true}
     }
 
 ]
+
 
 const router = new VueRouter({
   mode: 'history',
